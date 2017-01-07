@@ -1,3 +1,2 @@
-#include "KernelFilter.h"
-
+#include "../include/KernelFilter.h"
 int main() { return 0; }
