@@ -8,7 +8,7 @@ find_package( OpenCV REQUIRED )
 add_executable (
     KernelFilter
     ${CMAKE_BINARY_DIR}/../src/KernelFilter.cpp
-    ${CMAKE_BINARY_DIR}/../src/KernelSlider.cpp
+    ${CMAKE_BINARY_DIR}/../src/KernelSumSlider.cpp
     ${CMAKE_BINARY_DIR}/../test/test.cpp
 )
 target_link_libraries( KernelFilter ${OpenCV_LIBS} )
