@@ -1,2 +1,6 @@
 #include "../include/KernelFilter.h"
-int main() { return 0; }
+
+template <class T>
+KernelFilter<T>::KernelFilter(const Mat& image, const Kernel& kernel)
+    : image(image), kernel(kernel) {}
+
