@@ -29,11 +29,14 @@
 *.app
 bin/*
 
-# Ignore Mac-specific files
+# Mac-specific files
 .DS_Store
 
-# Ignore CMake-generated files
+# CMake-generated files
 build/CMakeCache.txt
 build/CMakeFiles/
 build/Makefile
 build/cmake_install.cmake
+
+# Notes
+notes.txt
