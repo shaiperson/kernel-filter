@@ -27,6 +27,13 @@
 *.exe
 *.out
 *.app
+bin/*
 
 # Ignore Mac-specific files
 .DS_Store
+
+# Ignore CMake-generated files
+build/CMakeCache.txt
+build/CMakeFiles/
+build/Makefile
+build/cmake_install.cmake
