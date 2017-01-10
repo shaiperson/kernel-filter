@@ -3,9 +3,9 @@
 
 #include "header.h"
 #include "Kernel.h"
-#include "KernelSlider.h"
+#include "KernelSumSlider.h"
 
-template <class PixelType>
+template <class PixelType, class KernelType>
 class KernelFilter {
 
 public:
@@ -16,8 +16,9 @@ private:
     Mat image;
     Kernel kernel;
 
-    virtual Mat imageToConvolutionData() const = 0;
     Mat convolve(const Mat& data) const;
+    Scalar sumOnTarget(const Point& target) const;
+    virtual Mat imageToConvolutionData() const = 0;
 
 };
 
