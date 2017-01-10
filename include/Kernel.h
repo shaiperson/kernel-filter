@@ -4,8 +4,8 @@
 #include "header.h"
 
 struct Kernel {
-    Mat values;
-    Point target;
+    Mat weights;
+    Point pin;
 };
 
 #endif
