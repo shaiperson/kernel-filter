@@ -4,7 +4,6 @@
 #include "header.h"
 #include "Kernel.h"
 
-template <class PixelType, class KernelType>
 class KernelFilter {
 
 public:
@@ -16,7 +15,7 @@ private:
     Kernel kernel;
 
     Mat convolve(const Mat& data) const;
-    Scalar sumOnTarget(const Point& target) const;
+    Scalar sumOnTarget(const Point& target, const Mat& data) const;
     virtual Mat imageToConvolutionData() const = 0;
 
 };
