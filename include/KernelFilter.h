@@ -3,7 +3,6 @@
 
 #include "header.h"
 #include "Kernel.h"
-#include "KernelSumSlider.h"
 
 template <class PixelType, class KernelType>
 class KernelFilter {
