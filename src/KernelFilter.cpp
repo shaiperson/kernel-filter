@@ -9,8 +9,7 @@ Mat KernelFilter::compute() const {
 
 Vec3b KernelFilter::convolutionStep(const Mat& data, const Point& target) const {
     Vec3d sum = {0,0,0};
-    size_t blockFirstRow = target.y - kernelPin.y;
-    size_t blockFirstCol = target.x - kernelPin.x;
+    Point blockTopLeft(target.y - kernelPin.y, target.x - kernelPin.x);
     for (size_t i = 0; i < kernel.rows; ++i)
         for (size_t j = 0; j < kernel.cols; ++j)
             for (size_t c = 0; c < data.channels(); ++c)
