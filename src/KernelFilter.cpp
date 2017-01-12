@@ -7,7 +7,7 @@ Mat KernelFilter::compute() const {
     return convolve(toConvolutionData());
 }
 
-Vec3d KernelFilter::convolutionStep(const Mat& data, const Point& target) const {
+Vec3b KernelFilter::convolutionStep(const Mat& data, const Point& target) const {
     Vec3d sum = {0,0,0};
     size_t blockFirstRow = target.y - kernelPin.y;
     size_t blockFirstCol = target.x - kernelPin.x;
@@ -24,14 +24,14 @@ Vec3d KernelFilter::convolutionStep(const Mat& data, const Point& target) const 
 Mat KernelFilter::convolve(const Mat& data) const {
     size_t resultRows = data.rows - kernel.rows + 1;
     size_t resultCols = data.cols - kernel.cols + 1;
-    Mat result(resultRows, resultCols, CV_64FC3);
+    Mat result(resultRows, resultCols, CV_8UC3);
 
     int pinY = kernelPin.y;
     int pinX = kernelPin.y;
 
     for (size_t i = 0; i < resultRows; ++i)
         for (size_t j = 0; j < resultCols; ++j)
-            result.at<Vec3d>(i,j) = convolutionStep(data, Point(pinY+i, pinX+j));
+            result.at<Vec3b>(i,j) = convolutionStep(data, Point(pinY+i, pinX+j));
 
     return result;
 }

@@ -2,6 +2,7 @@
 #define KERNELFILTER_H
 
 #include "header.h"
+#include <cmath>
 
 class KernelFilter {
 
@@ -16,7 +17,7 @@ protected:
 
     virtual Mat toConvolutionData() const = 0;
     Mat convolve(const Mat& convolutionData) const;
-    Vec3d convolutionStep(const Mat& data, const Point& target) const;
+    Vec3b convolutionStep(const Mat& data, const Point& target) const;
 
 };
 
