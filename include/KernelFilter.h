@@ -4,7 +4,10 @@
 #include "header.h"
 #include <cmath>
 
+template <typename DataType, size_t Channels>
 class KernelFilter {
+
+typedef Vec<DataType, Channels> PixelType;
 
 public:
     KernelFilter(const Mat& data, const Mat& kernel, const Point& kernelPin);
@@ -17,17 +20,23 @@ protected:
 
     virtual Mat toConvolutionData() const = 0;
     Mat convolve(const Mat& convolutionData) const;
-    Vec3b convolutionStep(const Mat& data, const Point& target) const;
+    PixelType convolutionStep(const Mat& data, const Point& target) const;
+    PixelType roundAndConvertToDataType(const Vec<double,Channels>&) const;
 
 };
 
-class KernelFilterEdgeCrop : public KernelFilter {
+template <typename DataType, size_t Channels>
+class KernelFilterEdgeCrop : public KernelFilter<DataType, Channels> {
 
-    using KernelFilter::KernelFilter;
+    using KernelFilter<DataType, Channels>::KernelFilter;
+    using KernelFilter<DataType, Channels>::data;
+
     Mat toConvolutionData() const {
         return data;
     }
 
 };
+
+#include "../src/KernelFilter.cpp"
 
 #endif
