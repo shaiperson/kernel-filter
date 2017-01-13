@@ -16,6 +16,7 @@ public:
     class Convolver {
     public:
         Convolver(const KernelFilter* filter) : filter(filter) {}
+        Mat convolve(const Mat& convolutionData) const;
         PixelType convolutionStep(const Mat& data, const Point& target) const;
         PixelType roundAndConvertToDataType(const Vec<double,Channels>&) const;
     private:
@@ -28,7 +29,6 @@ protected:
     Point kernelPin;
 
     virtual Mat toConvolutionData() const = 0;
-    Mat convolve(const Mat& convolutionData) const;
 
 };
 

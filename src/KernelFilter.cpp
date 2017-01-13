@@ -10,23 +10,22 @@ KernelFilter<DT,CH>::KernelFilter(const Mat& data, const Mat& kernel, const Poin
 
 template <typename DT, size_t CH>
 Mat KernelFilter<DT,CH>::compute() const {
-    return convolve(toConvolutionData());
+    Convolver convolver(this);
+    return convolver.convolve(toConvolutionData());
 }
 
 template <typename DT, size_t CH>
-Mat KernelFilter<DT,CH>::convolve(const Mat& data) const {
-    Convolver convolver(this);
+Mat KernelFilter<DT,CH>::Convolver::convolve(const Mat& data) const {
+    size_t resultRows = (filter->data).rows - (filter->kernel).rows + 1;
+    size_t resultCols = (filter->data).cols - (filter->kernel).cols + 1;
+    Mat result(resultRows, resultCols, (filter->data).type());
 
-    size_t resultRows = data.rows - kernel.rows + 1;
-    size_t resultCols = data.cols - kernel.cols + 1;
-    Mat result(resultRows, resultCols, data.type());
-
-    int pinY = kernelPin.y;
-    int pinX = kernelPin.x;
+    int pinY = (filter->kernelPin).y;
+    int pinX = (filter->kernelPin).x;
 
     for (size_t i = 0; i < resultRows; ++i)
         for (size_t j = 0; j < resultCols; ++j)
-            result.at<PixelType>(i,j) = convolver.convolutionStep(data, Point(pinY+i, pinX+j));
+            result.at<PixelType>(i,j) = convolutionStep(data, Point(pinY+i, pinX+j));
 
     return result;
 }
