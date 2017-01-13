@@ -11,11 +11,11 @@ KernelFilter<DT,CH>::KernelFilter(const Mat& data, const Mat& kernel, const Poin
 template <typename DT, size_t CH>
 Mat KernelFilter<DT,CH>::compute() const {
     Convolver convolver(this);
-    return convolver.convolve(toConvolutionData());
+    return convolver.convolveCroppingEdges(toConvolutionData());
 }
 
 template <typename DT, size_t CH>
-Mat KernelFilter<DT,CH>::Convolver::convolve(const Mat& data) const {
+Mat KernelFilter<DT,CH>::Convolver::convolveCroppingEdges(const Mat& data) const {
     size_t resultRows = (filter->data).rows - (filter->kernel).rows + 1;
     size_t resultCols = (filter->data).cols - (filter->kernel).cols + 1;
     Mat result(resultRows, resultCols, (filter->data).type());
