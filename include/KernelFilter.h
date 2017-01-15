@@ -11,22 +11,25 @@ typedef Vec<DataType, Channels> PixelType;
 
 public:
 
-    KernelFilter(const Mat& data, const Mat& kernel, const Point& kernelPin);
+    KernelFilter(const Mat& image, const Mat& kernel, const Point& kernelPin);
     Mat compute() const;
 
     class Convolver {
     public:
-        Convolver(const KernelFilter* filter) : filter(filter) {}
-        Mat convolveCroppingEdges(const Mat& convolutionData) const;
-        PixelType convolutionStep(const Mat& data, const Point& target) const;
+        Convolver(const Mat& data, const Mat& kernel, const Point& kernelPin);
+        Mat convolveCroppingEdges() const;
     private:
-        const KernelFilter* filter;
+        Mat data;
+        Mat kernel;
+        Point kernelPin;
+
+        PixelType convolutionStep(const Point& target) const;
         PixelType roundAndConvertToDataType(const Vec<double,Channels>&) const;
     };
 
 protected:
 
-    Mat data;
+    Mat image;
     Mat kernel;
     Point kernelPin;
 
@@ -38,13 +41,14 @@ template <typename DataType, size_t Channels>
 class KernelFilterEdgeCrop : public KernelFilter<DataType, Channels> {
 
     using KernelFilter<DataType, Channels>::KernelFilter;
-    using KernelFilter<DataType, Channels>::data;
+    using KernelFilter<DataType, Channels>::image;
 
     Mat toConvolutionData() const {
-        return data;
+        return image;
     }
 };
 
 #include "../src/KernelFilter.cpp"
+#include "../src/Convolver.cpp"
 
 #endif
