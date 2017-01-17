@@ -4,7 +4,7 @@
 #include "../include/KernelFilter.h"
 
 template <typename DT, size_t CH>
-KernelFilter<DT,CH>::KernelFilter(const Mat& image, const Mat& kernel, const Point& kernelPin) :
+KernelFilter<DT,CH>::KernelFilter(const Mat& image, const Mat& kernel, const Cell& kernelPin) :
     image(image), kernel(kernel), kernelPin(kernelPin) {}
 
 template <typename DT, size_t CH>

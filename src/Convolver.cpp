@@ -3,8 +3,10 @@
 
 #include "../include/KernelFilter.h"
 
+#include <iostream>
+
 template <typename DT, size_t CH>
-KernelFilter<DT,CH>::Convolver::Convolver(const Mat& data, const Mat& kernel, const Point& kernelPin)
+KernelFilter<DT,CH>::Convolver::Convolver(const Mat& data, const Mat& kernel, const Cell& kernelPin)
     : data(data), kernel(kernel), kernelPin(kernelPin) {}
 
 template <typename DT, size_t CH>
@@ -13,25 +15,25 @@ Mat KernelFilter<DT,CH>::Convolver::convolveCroppingEdges() const {
     size_t resultCols = data.cols - kernel.cols + 1;
     Mat result(resultRows, resultCols, data.type());
 
-    int pinY = kernelPin.y;
-    int pinX = kernelPin.x;
+    int pinRow = kernelPin.row;
+    int pinCol = kernelPin.col;
 
     for (size_t i = 0; i < resultRows; ++i)
         for (size_t j = 0; j < resultCols; ++j)
-            result.at<PixelType>(i,j) = convolutionStep(Point(pinY+i, pinX+j));
+            result.at<PixelType>(i,j) = convolutionStep(Cell(pinRow+i, pinCol+j));
 
     return result;
 }
 
 template <typename DT, size_t CH>
-typename KernelFilter<DT,CH>::PixelType KernelFilter<DT,CH>::Convolver::convolutionStep(const Point& target) const {
+typename KernelFilter<DT,CH>::PixelType KernelFilter<DT,CH>::Convolver::convolutionStep(const Cell& target) const {
     Vec<double,CH> sum;
-    Point blockTopLeft(target.y - kernelPin.y, target.x - kernelPin.x);
+    Cell blockTopLeft(target.row - kernelPin.row, target.col - kernelPin.col);
     for (size_t i = 0; i < kernel.rows; ++i)
         for (size_t j = 0; j < kernel.cols; ++j)
             sum +=
-                kernel.template at<double>(i,j) *
-                (Vec<double,CH>)data.template at<PixelType>(blockTopLeft.y + j, blockTopLeft.x + i);
+                kernel . template at<double>(i,j) *
+                (Vec<double,CH>)data . template at<PixelType>(blockTopLeft.row + i, blockTopLeft.col + j);
     return roundAndConvertToDataType(sum);
 }
 
