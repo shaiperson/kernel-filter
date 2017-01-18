@@ -42,17 +42,6 @@ protected:
 
 };
 
-template <typename DataType, size_t Channels>
-class KernelFilterEdgeCrop : public KernelFilter<DataType, Channels> {
-
-    using KernelFilter<DataType, Channels>::KernelFilter;
-    using KernelFilter<DataType, Channels>::image;
-
-    Mat toConvolutionData() const {
-        return image;
-    }
-};
-
 #include "../src/KernelFilter.cpp"
 #include "../src/Convolver.cpp"
 
