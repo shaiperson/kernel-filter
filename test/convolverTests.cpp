@@ -1,5 +1,6 @@
 #include "catch.hpp"
 #include "test.h"
+#include "../include/KernelFilter.h"
 
 SCENARIO("Convolving crops image appropriately", "[cropping]") {
     GIVEN("A square image of certain pixel type") {

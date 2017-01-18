@@ -8,7 +8,11 @@ find_package( OpenCV REQUIRED )
 
 set ( TEST_SOURCES
     ${CMAKE_BINARY_DIR}/../test/catch.cpp
-    ${CMAKE_BINARY_DIR}/../test/convolverTests.cpp )
+    ${CMAKE_BINARY_DIR}/../test/ConvolverTests.cpp
+    ${CMAKE_BINARY_DIR}/../test/generalFilterTests.cpp
+    ${CMAKE_BINARY_DIR}/../test/KernelFilterEdgeCropTests.cpp
+    ${CMAKE_BINARY_DIR}/../test/KernelFilterEdgeExtensionTests.cpp
+    ${CMAKE_BINARY_DIR}/../test/KernelFilterEdgeWrapTests.cpp )
 set ( EXAMPLE_SOURCES
     ${CMAKE_BINARY_DIR}/../example/example.cpp )
 

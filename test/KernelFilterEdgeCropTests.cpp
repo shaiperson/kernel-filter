@@ -1,5 +1,6 @@
 #include "catch.hpp"
 #include "test.h"
+#include "../include/KernelFilterEdgeCrop.h"
 
 SCENARIO("Filtering with edge crop policy crops image correctly", "[edgecrop] [id]") {
     GIVEN("A square single-channel image") {
