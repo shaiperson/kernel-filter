@@ -25,7 +25,7 @@ class KernelFilterEdgeWrap : public KernelFilter<DataType, Channels> {
             kernel.cols-kernelPin.col-1,
             BORDER_WRAP
         );
-        std::cout << result << std::endl;
+        
         return result;
     }
 

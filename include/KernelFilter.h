@@ -4,9 +4,10 @@
 #include "header.h"
 
 struct Cell {
-    Cell(size_t row, size_t col) : row(row), col(col) {}
+    Cell(int row, int col) : row(row), col(col) {}
     Cell(const Cell& another) : row(another.row), col(another.col) {}
-    size_t row, col;
+    Cell() : row(-1), col(-1) {}
+    int row, col;
 };
 
 template <typename DataType, size_t Channels>
@@ -17,6 +18,9 @@ typedef Vec<DataType, Channels> PixelType;
 public:
 
     KernelFilter(const Mat& image, const Mat& kernel, const Cell& kernelPin);
+    KernelFilter(const Mat& image);
+    void setKernel(Mat& kernel, Cell& kernelPin);
+
     Mat compute() const;
 
     class Convolver {
