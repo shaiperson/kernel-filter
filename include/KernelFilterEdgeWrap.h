@@ -14,21 +14,10 @@ class KernelFilterEdgeWrap : public KernelFilter<DataType, Channels> {
     using super::kernel;
     using super::kernelPin;
 
-    Mat toConvolutionData() const {
-        Mat result(image.rows+kernel.rows-1, image.cols+kernel.cols-1, image.type());
-        copyMakeBorder(
-            image,
-            result,
-            kernelPin.row,
-            kernel.rows-kernelPin.row-1,
-            kernelPin.col,
-            kernel.cols-kernelPin.col-1,
-            BORDER_WRAP
-        );
-        
-        return result;
-    }
+    Mat toConvolutionData() const;
 
 };
+
+#include "../src/KernelFilterEdgeWrap.cpp"
 
 #endif

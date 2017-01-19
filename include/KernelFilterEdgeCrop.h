@@ -12,9 +12,9 @@ class KernelFilterEdgeCrop : public KernelFilter<DataType, Channels> {
     using super::KernelFilter;
     using super::image;
 
-    Mat toConvolutionData() const {
-        return super::image;
-    }
+    Mat toConvolutionData() const;
 };
+
+#include "../src/KernelFilterEdgeCrop.cpp"
 
 #endif
