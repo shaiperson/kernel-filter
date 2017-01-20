@@ -1,7 +1,10 @@
 #ifndef KERNELFILTER_H
 #define KERNELFILTER_H
 
-#include "header.h"
+#include <opencv2/core.hpp>
+
+using namespace std;
+using namespace cv;
 
 struct Cell {
     Cell(int row, int col) : row(row), col(col) {}

@@ -1,7 +1,6 @@
 #ifndef KERNELFILTEREDGEEXTENSION_H
 #define KERNELFILTEREDGEEXTENSION_H
 
-#include "header.h"
 #include "KernelFilter.h"
 
 template <typename DataType, size_t Channels>
