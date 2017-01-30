@@ -4,6 +4,8 @@ The functionality is similar to OpenCV's filter2D (see http://docs.opencv.org/2.
 
 Currently, three policies are implemented: _wrap_, _extend_ and _crop_. _Wrap_ and _extend_ are analogous to OpenCV's _BORDER\_WRAP_ and _BORDER\_REPLICATE_. _Crop_ simply crops out the borders.
 
+This code relies on OpenCV2 for input/output and basic structures and functions for handling images.
+
 - Go to build/
 - Run cmake . to create Makefile
 - Run make to create executables
